@@ -1,0 +1,60 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    color: #353535;
+    font-size: 15px;
+}
+
+div{
+    display: inline-block;
+    position: absolute;
+}
+
+.handle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+
+.note{
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    padding-top: 30px;
+    transition: box-shadow 100ms ease-out;
+}
+
+.note:active{
+    box-shadow: 0 15px 20px 3px rgb(0,0,0,0.12);
+}
+
+.note textarea{
+    position: relative;
+    border: none;
+    background: none;
+    resize: none;
+    width: 200px;
+    min-height: 250px;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.note textarea:focus{
+    outline: none;
+}
+
+.counter{
+    user-select: none;
+    position: absolute;
+    margin: 5px 5px;
+    right: 0;
+    bottom: 0;
+    font-size: 0.8em;
+    z-index: 0;
+}
+
+.color{
+    background-image: linear-gradient(to bottom, #fff6b9, #fff5ae, #fff3a2, #fff297, #fff08b);
+}
