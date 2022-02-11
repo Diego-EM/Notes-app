@@ -1,13 +1,17 @@
 div{
     display: inline-block;
     position: absolute;
+    transition: box-shadow 100ms ease-out;
+}
+
+div:active{
+    box-shadow: 0 15px 20px 3px rgb(0,0,0,0.12);
 }
 
 .handle{
     position: absolute;
-    height: 30px;
+    height: 100%;
     width: 100%;
-    outline: 1px dashed #000;
     z-index: 100;
 }
 
@@ -15,6 +19,7 @@ div{
     position: fixed;
     right: 0;
     margin: 15px;
+    z-index: 200;
 }
 
 .create{

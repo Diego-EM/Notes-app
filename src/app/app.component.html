@@ -1,3 +1,7 @@
-<app-note></app-note>
 <app-dot class="dot create" [background]="'#40e77b'"></app-dot>
 <app-dot class="dot erase" [background]="'#ec4a73'"></app-dot>
+
+<div cdkDrag>
+    <div class="handle" cdkDragHandle></div>
+    <app-note></app-note>
+</div>
