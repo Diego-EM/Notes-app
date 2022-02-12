@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,16 +7,11 @@ import { Component, Renderer2 } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor(private render: Renderer2){}
+  constructor(){}
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-  }
-
-  dropped(e: any): void {
-    console.log("Elemento soltado");
-    console.log(e);
   }
 }

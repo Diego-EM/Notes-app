@@ -29,8 +29,4 @@ export class NoteComponent implements OnInit {
       counter.textContent = `${textarea.value.length}/${max}`;
     })
   }
-
-  dropped(e: any): void { 
-    console.log(e);
-  }
 }
