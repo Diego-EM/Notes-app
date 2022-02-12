@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { 
+  Component,
+  ViewContainerRef,
+  ComponentFactoryResolver
+
+} from '@angular/core';
+
+import { NoteComponent } from './components/note/note.component';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +14,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor(){}
+  constructor(private vcRef: ViewContainerRef, private resolver: ComponentFactoryResolver){}
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+  }
+
+  createNote(): void {
+    const note = this.resolver.resolveComponentFactory(NoteComponent);
+    this.vcRef.createComponent(note);
   }
 }

@@ -9,12 +9,23 @@ div{
     position: absolute;
 }
 
+.handle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 50;
+}
+
 .note{
-    position: relative;
+    position: absolute;
     display: inline-block;
     padding: 20px;
     padding-top: 30px;
+    opacity: 0;
     transition: box-shadow 100ms ease-out;
+    animation: appear 150ms cubic-bezier(.5,.05,.07,.7) forwards;
 }
 
 .note:active{
@@ -48,4 +59,13 @@ div{
 
 .color{
     background-image: linear-gradient(to bottom, #fff6b9, #fff5ae, #fff3a2, #fff297, #fff08b);
+}
+
+@keyframes appear{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
