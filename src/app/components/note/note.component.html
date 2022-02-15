@@ -1,5 +1,11 @@
-<div class="note color" cdkDrag>
-    <div class="handle" cdkDragHandle></div>
+<div class="note color"
+    *ngIf="view"
+    cdkDrag>
+    <div class="handle" cdkDragHandle>
+        <div class="delete" #delete>
+            <img src="../assets/delete.svg" alt="remove note">
+        </div>
+    </div>
     <textarea placeholder="Write something..." #textarea></textarea>
     <div class="counter" #counter></div>
 </div>

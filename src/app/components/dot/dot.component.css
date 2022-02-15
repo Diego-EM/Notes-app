@@ -1,5 +1,13 @@
 .dot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100px;
     width: 100px;
     border-radius: 50%;
+}
+
+.dot img{
+    width: 50%;
+    filter: invert(1);
 }

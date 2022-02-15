@@ -1,4 +1,8 @@
 <div class="dot"
-    [ngStyle]="{'background': background}">
-    <img src="" alt=""/>
+    [ngStyle]="{'background': background}"
+    [@hover]="hover"
+    (mouseenter)="changeState()"
+    (mouseleave)="changeState()"
+    >
+    <img [src]="src" [alt]="alt"/>
 </div>

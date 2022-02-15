@@ -24,6 +24,7 @@ export class AppComponent {
 
   createNote(): void {
     const note = this.resolver.resolveComponentFactory(NoteComponent);
-    this.vcRef.createComponent(note);
+    const element = this.vcRef.createComponent(note);
+    console.log(element);
   }
 }
