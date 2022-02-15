@@ -1,6 +1,9 @@
 <div class="note color"
     *ngIf="view"
-    cdkDrag>
+    cdkDrag
+    [id]="noteId"
+    #note
+    >
     <div class="handle" cdkDragHandle>
         <div class="delete" #delete>
             <img src="../assets/delete.svg" alt="remove note">
