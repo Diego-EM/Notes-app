@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, ElementRef, Input } from '@angular/core';
 import { NotesHandleService } from 'src/app/services/notes-handle.service';
 
 @Component({
@@ -13,9 +13,8 @@ export class NoteComponent implements OnInit {
   @ViewChild('counter') counter!: ElementRef
   @ViewChild('delete') delete!: ElementRef
 
-  noteId: number|null = null;
-
-  view: boolean = true;
+  @Input('textvalue') textvalue: string = "";
+  @Input('noteid') noteid: number|null = null;
 
   constructor(
     private render: Renderer2,
@@ -45,23 +44,25 @@ export class NoteComponent implements OnInit {
         if(textcontent.length > 0) {
           this.noteHandler.addNote(textcontent);
           this.noteHandler.getLastKey()
-            .then( (key: number) => this.render.setProperty(note,'id',key));
+            .then( (key: number) => this.noteid = key);
         }
       } else {
         if(textcontent.length > 0) {
-          this.noteHandler.updateNote(textcontent, note.id);
+          this.noteHandler.updateNote(textcontent, this.noteid);
         } else {
-          this.noteHandler.deleteNote(note.id);
+          this.noteHandler.deleteNote(this.noteid);
           note.id = "null";
         }
       }
+      this.textvalue = textcontent;
     })
 
     this.render.listen(remove,'click',(e)=>{
       const note = this.note.nativeElement;
       const parent = this.render.parentNode(note);
-      if(note.id !== 'null') this.noteHandler.deleteNote(note.id)
+      if(this.noteid !== null) this.noteHandler.deleteNote(this.noteid)
       this.render.removeChild('document',parent);
     })
   }
+
 }

@@ -30,9 +30,9 @@ export class NotesHandleService {
     }
   }
 
-  updateNote(textcontent: string, id: string){
+  updateNote(textcontent: string, id: number|null){
     const IDBquery = this.dbTransaction('readwrite');
-    IDBquery.objStore.put({textcontent: textcontent}, parseInt(id));
+    IDBquery.objStore.put({textcontent: textcontent}, id);
     IDBquery.IDBtransaction.oncomplete = () =>{
       console.log('Note updated succesfully');
     }
@@ -41,14 +41,32 @@ export class NotesHandleService {
     }
   }
 
-  deleteNote(id: string){
+  deleteNote(id: number|null){
     const IDBquery = this.dbTransaction('readwrite');
-    IDBquery.objStore.delete(parseInt(id));
+    IDBquery.objStore.delete(id);
     IDBquery.IDBtransaction.oncomplete = () =>{
       console.log('Note removed succesfully');
     }
     IDBquery.IDBtransaction.onerror = () => {
       console.log('Ha ocurrido un error, vuelva a intentarlo mas tarde');
+    }
+  }
+
+  getNotes(query: any, generate: (obj: Object) => void): any{
+    this.IDBrequest.onsuccess = () => {
+      const db = this.IDBrequest.result;
+      const IDBtransaction = db.transaction('texts', query);
+      const objStore = IDBtransaction.objectStore('texts');
+      const cursor = objStore.openCursor();
+      cursor.addEventListener('success',()=>{
+        if (cursor.result){
+          generate({
+            textcontent: cursor.result.value.textcontent,
+            key: cursor.result.key
+          });
+          cursor.result.continue() ;
+        } else console.log('lista completa');
+      })
     }
   }
 
@@ -75,6 +93,4 @@ export class NotesHandleService {
         IDBtransaction: IDBtransaction
       }
   }
-
-
 }

@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { NoteComponent } from './components/note/note.component';
 import { DotComponent } from './components/dot/dot.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoteContainerDirective } from './directives/note-container.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NoteComponent,
-    DotComponent
+    DotComponent,
+    NoteContainerDirective
   ],
   imports: [
     BrowserModule,
