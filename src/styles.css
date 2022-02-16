@@ -5,9 +5,7 @@
 }
 
 body{
-    /* background-image: linear-gradient(to left top, #fff4c3, #feefba, #fee9b2, #fee4a9, #fedea1, #fedb9d, #ffd898, #ffd594, #ffd593, #ffd491, #ffd490, #ffd38e); */
-    background-repeat: no-repeat;
-    height: 100vh;
+    background-image: linear-gradient(to right top, #fffaf4, #fffaf2, #fffaf1, #fffbef, #fffbee);
 }
 
 html, body { height: 100%; }

@@ -1,13 +1,14 @@
 <div class="note color"
     cdkDrag
-    (cdkDragEnded)="getPosition()"
+    (cdkDragStarted)="toTop()"
+    (cdkDragEnded)="getPosition(); toBottom()"
     [id]="noteid"
     #note
     >
     <div class="handle" cdkDragHandle>
-        <div class="delete" #delete>
-            <img src="../assets/delete.svg" alt="remove note">
-        </div>
+    </div>
+    <div class="delete" #delete>
+        <img src="../assets/delete.svg" alt="remove note">
     </div>
     <textarea placeholder="Write something..." #textarea [value]="textvalue"></textarea>
     <div class="counter" #counter></div>

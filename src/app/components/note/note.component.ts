@@ -27,7 +27,7 @@ export class NoteComponent implements OnInit {
 
   ngAfterViewInit(): void {
 
-    this.note.nativeElement.style.transform = `translate3d(${this.position.x}px,${this.position.y}px,0)`
+    this.note.nativeElement.style.transform = `translate3d(${this.position.x}px,${this.position.y}px,0)`;
 
     const remove = this.delete.nativeElement;
     const counter = this.counter.nativeElement;
@@ -61,11 +61,14 @@ export class NoteComponent implements OnInit {
       this.textvalue = textcontent;
     })
 
-    this.render.listen(remove,'click',(e)=>{
+    this.render.listen(remove,'click',()=>{
       const note = this.note.nativeElement;
-      const parent = this.render.parentNode(note);
-      if(this.noteid !== null) this.noteHandler.deleteNote(this.noteid)
-      this.render.removeChild('document',parent);
+      this.render.addClass(note,'removeAnimation');
+      setTimeout(()=>{
+        const parent = this.render.parentNode(note);
+        if(this.noteid !== null) this.noteHandler.deleteNote(this.noteid)
+        this.render.removeChild('document',parent);
+      }, 80)
     })
   }
 
@@ -91,4 +94,13 @@ export class NoteComponent implements OnInit {
       }
   }
 
+  toTop(){
+    const note = this.note.nativeElement;
+    note.style.zIndex = 1000;
+  }
+
+  toBottom(){
+    const note = this.note.nativeElement;
+    note.style.zIndex = 10;
+  }
 }
