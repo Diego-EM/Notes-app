@@ -19,36 +19,35 @@ export class NotesHandleService {
     }
   }
 
-  addNote(textcontent: string): void {
+  addNote(textcontent: string, x: number, y: number): void {
     const IDBquery = this.dbTransaction('readwrite');
-    IDBquery.objStore.add({ textcontent: textcontent })
-    IDBquery.IDBtransaction.oncomplete = () =>{
-      console.log('Note saved successfully');
-    }
+    IDBquery.objStore.add({
+      textcontent: textcontent,
+      x: x,
+      y: y
+    })
     IDBquery.IDBtransaction.onerror = () => {
-      console.log('Ha ocurrido un error, vuelva a intentarlo mas tarde');
+      console.log("Error: Can't connect to DB, try it later");
     }
   }
 
-  updateNote(textcontent: string, id: number|null){
+  updateNote(textcontent: string, x: number, y: number, id: number|null){
     const IDBquery = this.dbTransaction('readwrite');
-    IDBquery.objStore.put({textcontent: textcontent}, id);
-    IDBquery.IDBtransaction.oncomplete = () =>{
-      console.log('Note updated succesfully');
-    }
+    IDBquery.objStore.put({
+      textcontent: textcontent,
+      x: x,
+      y: y
+    }, id)
     IDBquery.IDBtransaction.onerror = () => {
-      console.log('Ha ocurrido un error, vuelva a intentarlo mas tarde');
+      console.log("Error: Can't connect to DB, try it later");
     }
   }
 
   deleteNote(id: number|null){
     const IDBquery = this.dbTransaction('readwrite');
     IDBquery.objStore.delete(id);
-    IDBquery.IDBtransaction.oncomplete = () =>{
-      console.log('Note removed succesfully');
-    }
     IDBquery.IDBtransaction.onerror = () => {
-      console.log('Ha ocurrido un error, vuelva a intentarlo mas tarde');
+      console.log("Error: Can't connect to DB, try it later");
     }
   }
 
@@ -62,10 +61,12 @@ export class NotesHandleService {
         if (cursor.result){
           generate({
             textcontent: cursor.result.value.textcontent,
+            x: cursor.result.value.x,
+            y: cursor.result.value.y,
             key: cursor.result.key
           });
           cursor.result.continue() ;
-        } else console.log('lista completa');
+        }
       })
     }
   }

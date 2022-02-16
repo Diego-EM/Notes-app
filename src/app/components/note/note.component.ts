@@ -15,6 +15,7 @@ export class NoteComponent implements OnInit {
 
   @Input('textvalue') textvalue: string = "";
   @Input('noteid') noteid: number|null = null;
+  @Input('position') position: any = { x: 0, y: 0}
 
   constructor(
     private render: Renderer2,
@@ -25,6 +26,9 @@ export class NoteComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+
+    this.note.nativeElement.style.transform = `translate3d(${this.position.x}px,${this.position.y}px,0)`
+
     const remove = this.delete.nativeElement;
     const counter = this.counter.nativeElement;
     const textarea = this.textarea.nativeElement;
@@ -42,13 +46,13 @@ export class NoteComponent implements OnInit {
       const note = this.note.nativeElement;
       if (note.id === 'null'){
         if(textcontent.length > 0) {
-          this.noteHandler.addNote(textcontent);
+          this.noteHandler.addNote(textcontent, this.position.x, this.position.y);
           this.noteHandler.getLastKey()
             .then( (key: number) => this.noteid = key);
         }
       } else {
         if(textcontent.length > 0) {
-          this.noteHandler.updateNote(textcontent, this.noteid);
+          this.noteHandler.updateNote(textcontent, this.position.x, this.position.y, this.noteid);
         } else {
           this.noteHandler.deleteNote(this.noteid);
           note.id = "null";
@@ -63,6 +67,28 @@ export class NoteComponent implements OnInit {
       if(this.noteid !== null) this.noteHandler.deleteNote(this.noteid)
       this.render.removeChild('document',parent);
     })
+  }
+
+  getPosition(){
+    const note = this.note.nativeElement;
+    const textcontent: string = this.textarea.nativeElement.value;
+    const pos = note.getBoundingClientRect()
+    this.position.x = pos.x;
+    this.position.y = pos.y;
+      if (note.id === 'null'){
+        if(textcontent.length > 0) {
+          this.noteHandler.addNote(textcontent, this.position.x, this.position.y);
+          this.noteHandler.getLastKey()
+            .then( (key: number) => this.noteid = key);
+        }
+      } else {
+        if(textcontent.length > 0) {
+          this.noteHandler.updateNote(textcontent, this.position.x, this.position.y, this.noteid);
+        } else {
+          this.noteHandler.deleteNote(this.noteid);
+          note.id = "null";
+        }
+      }
   }
 
 }
